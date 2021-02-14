@@ -1,8 +1,9 @@
 # SoftKompjuting-projekat
 
 Projekat iz predmeta Soft-kompjuting <br/>
-# Chatbot <br/>
 Članovi tima: Jelena Cupać sw13/2017, Aleksa Goljović sw14/2017
+# Chatbot <br/>
+Cilj projekta je davanje smislenih odgovora na korisnikove poruke u realnom vremenu. Korisnik ne treba da bude svestan da razgovara sa chatbot-om već sa pravom osobom.
 
 # Requirements
 Pre pokretanja je potrebno instalirati sledeće biblioteke:
