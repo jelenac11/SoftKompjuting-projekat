@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://user-images.githubusercontent.com/20112458/49326597-773b7280-f57a-11e8-853d-20ed61d18b0d.png"
+    />
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+      * {box-sizing: border-box}
+
+      html {
+        height: 100%;
+        margin: 0;
+      }
+
+      .tablink {
+        background-color: #141414;
+        color: white;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        font-size: 22px;
+        width: 33.333%;
+        height: 80px;
+        font-weight: bold;
+      }
+
+      .tablink:hover {
+        background-color: #777;
+      }
+
+      .tabcontent {
+        color: white;
+        display: none;
+        padding: 100px 40px;
+        height: 100%;
+      }
+
+      #Apple {background-color: #cf3030; color: black; height: 100%;}
+      #Amazon {background-color: #FF9900; color: black; height: 100%;}
+      #Uber {background-color: #0dbd69; height: 100%;}
+
+      body {
+        font-family: 'Open Sans', sans-serif;
+        height: 100%;
+        margin: 0;
+      }
+      #chatbox-Apple {
+        margin-left: 20px;
+        width: 93%;
+        margin-top: 60px;
+      }
+      #chatbox-Amazon {
+        margin-left: 20px;
+        width: 93%;
+        margin-top: 60px;
+      }
+      #chatbox-Uber {
+        margin-left: 20px;
+        width: 93%;
+        margin-top: 60px;
+      }
+      #userInput-Apple {
+        width: 1160px;
+        margin-top: 26px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #userInput-Amazon {
+        width: 1160px;
+        margin-top: 26px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #userInput-Uber {
+        width: 1160px;
+        margin-top: 26px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #textInput-Apple {
+        width: 1100px;
+        height: 40px;
+        border: none;
+        border-radius: 25px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 17px;
+        color: #12130F;
+        text-indent: 15px;
+      }
+      #textInput-Amazon {
+        width: 1100px;
+        height: 40px;
+        border: none;
+        border-radius: 25px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 17px;
+        color: #12130F;
+        text-indent: 15px;
+      }
+      #textInput-Uber {
+        width: 1100px;
+        height: 40px;
+        border: none;
+        border-radius: 25px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 17px;
+        color: #12130F;
+        text-indent: 15px;
+      }
+      input:focus{
+        outline: none;
+      }
+      button:focus{
+        outline: none;
+      }
+      .userText {
+        color: white;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 17px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+        text-align: right;
+        line-height: 30px;
+      }
+      .userText span {
+        background-color: #EAFDF8;
+        color: #141414;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 17px;
+        padding-right: 17px;
+        border-radius: 20px;
+      }
+      .botText {
+        color: white;
+        margin-bottom: 50px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 17px;
+        text-align: left;
+        line-height: 30px;
+      }
+      .botText-Apple span {
+        background-color: #cf3030;
+        color: white;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 17px;
+        padding-right: 17px;
+        border-radius: 20px;
+      }
+      .botText-Amazon span {
+        background-color: #FF9900;
+        color: white;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 17px;
+        padding-right: 17px;
+        border-radius: 20px;
+      }
+      .botText-Uber span {
+        background-color: #0dbd69;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 17px;
+        padding-right: 17px;
+        border-radius: 20px;
+      }
+      #tidbit {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+      }
+      h3 {
+        margin-top: 80px;
+        background-color: white;
+        width: 684px;
+        border: 3px solid black;
+        font-size: 1.75em;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px;
+      }
+      .boxed {
+      	background-image: url("https://fsb.zobj.net/crop.php?r=-P6OqVJVtAEn3HWiU44dCF8VtpVjSmB5btM0cUHqUgbi2xFGN3YQ8q3XpEUlOG0hF6rSZas8eX_zBoKWmF3IaPifbkt6ToV-mPQB0-EwU4wUa31Iu5gWsZjCHzaoC73kj1mmSdn2oKc1q0nIrFZCkWHE_fyIsJaPkcw0jDptCxL1Kxt0me-T_Jx8Ts0");
+        margin-left: auto;
+        margin-right: auto;
+        width: 1200px;
+        margin-top: 50px;
+        padding-bottom: 10px;
+        border: 3px solid black;
+      }
+      .send-Apple {
+        background-color: #cf3030;
+        border: none;
+        color: white;
+        padding: 14px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        padding-left: 15px;
+        padding-right: 17px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .send-Amazon {
+        background-color: #FF9900;
+        border: none;
+        color: white;
+        padding: 14px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        padding-left: 15px;
+        padding-right: 17px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      .send-Uber {
+        background-color: #0dbd69;
+        border: none;
+        color: white;
+        padding: 14px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        padding-left: 15px;
+        padding-right: 17px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+  	<button class="tablink" onclick="openPage('Apple', this, '#cf3030')">Apple</button>
+    <button class="tablink" onclick="openPage('Amazon', this, '#FF9900')" id="defaultOpen">Amazon</button>
+    <button class="tablink" onclick="openPage('Uber', this, '#0dbd69')">Uber</button>
+
+    <div id="Apple" class="tabcontent">
+      <div class="boxed">
+        <div>
+          <div id="chatbox-Apple">
+            <p class="botText-Apple">
+              <span>Hi! this is Apple Support! How can I help you?</span>
+            </p>
+          </div>
+        </div>
+        <div id="userInput-Apple">
+            <input id="textInput-Apple" type="text" name="msg" placeholder="Type here..." />
+            <button class="send-Apple"><i class="fa fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div id="Amazon" class="tabcontent">
+      <div class="boxed">
+        <div>
+          <div id="chatbox-Amazon">
+            <p class="botText-Amazon">
+              <span>Hi! this is Amazon Support! How can I help you?</span>
+            </p>
+          </div>
+        </div>
+        <div id="userInput-Amazon">
+            <input id="textInput-Amazon" type="text" name="msg" placeholder="Type here..." />
+            <button class="send-Amazon"><i class="fa fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div id="Uber" class="tabcontent">
+      <div class="boxed">
+        <div>
+          <div id="chatbox-Uber">
+            <p class="botText-Uber">
+              <span>Hi! this is Uber Support! How can I help you?</span>
+            </p>
+          </div>
+        </div>
+        <div id="userInput-Uber">
+            <input id="textInput-Uber" type="text" name="msg" placeholder="Type here..." />
+            <button class="send-Uber"><i class="fa fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        function getBotResponseApple() {
+          var rawText = $("#textInput-Apple").val();
+          var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+          $("#textInput-Apple").val("");
+          $("#chatbox-Apple").append(userHtml);
+          document
+            .getElementById("userInput-Apple")
+            .scrollIntoView({ block: "start", behavior: "smooth" });
+          $.get("/get-apple", { msg: rawText }).done(function(data) {
+            var botHtml = '<p class="botText-Apple"><span>' + data + "</span></p>";
+            $("#chatbox-Apple").append(botHtml);
+            document
+              .getElementById("userInput-Apple")
+              .scrollIntoView({ block: "start", behavior: "smooth" });
+          });
+        }
+        function getBotResponseAmazon() {
+          var rawText = $("#textInput-Amazon").val();
+          var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+          $("#textInput-Amazon").val("");
+          $("#chatbox-Amazon").append(userHtml);
+          document
+            .getElementById("userInput-Amazon")
+            .scrollIntoView({ block: "start", behavior: "smooth" });
+          $.get("/get-amazon", { msg: rawText }).done(function(data) {
+            var botHtml = '<p class="botText-Amazon"><span>' + data + "</span></p>";
+            $("#chatbox-Amazon").append(botHtml);
+            document
+              .getElementById("userInput-Amazon")
+              .scrollIntoView({ block: "start", behavior: "smooth" });
+          });
+        }
+        function getBotResponseUber() {
+          var rawText = $("#textInput-Uber").val();
+          var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+          $("#textInput-Uber").val("");
+          $("#chatbox-Uber").append(userHtml);
+          document
+            .getElementById("userInput-Uber")
+            .scrollIntoView({ block: "start", behavior: "smooth" });
+          $.get("/get-uber", { msg: rawText }).done(function(data) {
+            var botHtml = '<p class="botText-Uber"><span>' + data + "</span></p>";
+            $("#chatbox-Uber").append(botHtml);
+            document
+              .getElementById("userInput-Uber")
+              .scrollIntoView({ block: "start", behavior: "smooth" });
+          });
+        }
+
+        $("#textInput-Apple").keypress(function(e) {
+          if (e.which == 13) {
+            getBotResponseApple();
+          }
+        });
+        $("#textInput-Amazon").keypress(function(e) {
+          if (e.which == 13) {
+            getBotResponseAmazon();
+          }
+        });
+        $("#textInput-Uber").keypress(function(e) {
+          if (e.which == 13) {
+            getBotResponseUber();
+          }
+        });
+        $(".send-Apple").click(function(e) {
+          getBotResponseApple();
+        });
+        $(".send-Amazon").click(function(e) {
+          getBotResponseAmazon();
+        });
+        $(".send-Uber").click(function(e) {
+          getBotResponseUber();
+        });
+
+        function openPage(pageName,elmnt,color) {
+          var i, tabcontent, tablinks;
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablink");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].style.backgroundColor = "";
+          }
+          document.getElementById(pageName).style.display = "block";
+          elmnt.style.backgroundColor = color;
+        }
+
+        document.getElementById("defaultOpen").click();
+    </script>
+  </body>
+</html>
